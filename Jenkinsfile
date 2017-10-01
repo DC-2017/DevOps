@@ -51,16 +51,16 @@ docker run -d -p 80:80 -t 687517088689.dkr.ecr.us-east-2.amazonaws.com/dc-demo-a
         echo 'CREATE TEST ENVIRONMENT IN AWS'
         sh '''instanceID=$(aws ec2 describe-instance-status --instance-ids i-0c02f6e4791251ae4 --query 'InstanceStatuses[*].InstanceId' --region us-east-2 --output text | awk '{print $1}')
 if [ "$instanceID" == "i-0c02f6e4791251ae4" ]; then
-echo "Instance exists http://13.59.175.163"
+echo "Instance exists http://52.14.40.0"
 else
 aws cloudformation create-stack --stack-name dc-cicd-test --template-body https://raw.githubusercontent.com/DC-2017/DevOps/master/env/test/ec2-deploy.json
 fi'''
         echo 'DEPLOY LATEST DOCKER BUILD IMAGE TO TEST'
         sh '''cd /home/ec2-user
-ssh -i "jenkins-keypair.pem" ec2-user@ec2-13-59-175-163.us-east-2.compute.amazonaws.com $(aws ecr get-login --region us-east-2)
-ssh -i "jenkins-keypair.pem" ec2-user@ec2-13-59-175-163.us-east-2.compute.amazonaws.com docker stop '$(docker ps -q)'
-ssh -i "jenkins-keypair.pem" ec2-user@ec2-13-59-175-163.us-east-2.compute.amazonaws.com docker pull 687517088689.dkr.ecr.us-east-2.amazonaws.com/dc-demo-app-image:latest
-ssh -i "jenkins-keypair.pem" ec2-user@ec2-13-59-175-163.us-east-2.compute.amazonaws.com docker run -d -p 80:80 -t 687517088689.dkr.ecr.us-east-2.amazonaws.com/dc-demo-app-image:latest'''
+ssh -i "jenkins-keypair.pem" ec2-user@ec2-52-14-40-0.us-east-2.compute.amazonaws.com $(aws ecr get-login --region us-east-2)
+ssh -i "jenkins-keypair.pem" ec2-user@ec2-52-14-40-0.us-east-2.compute.amazonaws.com docker stop '$(docker ps -q)'
+ssh -i "jenkins-keypair.pem" ec2-user@ec2-52-14-40-0.us-east-2.compute.amazonaws.com docker pull 687517088689.dkr.ecr.us-east-2.amazonaws.com/dc-demo-app-image:latest
+ssh -i "jenkins-keypair.pem" ec2-user@ec2-52-14-40-0.us-east-2.compute.amazonaws.com docker run -d -p 80:80 -t 687517088689.dkr.ecr.us-east-2.amazonaws.com/dc-demo-app-image:latest'''
         
      /*	echo 'RUN FUNCTIONAL TESTS IN TEST'
 	build 'SeleniumTesting-TEST'
