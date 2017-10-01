@@ -58,7 +58,7 @@ fi'''
         echo 'DEPLOY LATEST DOCKER BUILD IMAGE TO TEST'
         sh '''cd /home/ec2-user
 ssh -i "jenkins-keypair.pem" ec2-user@ec2-52-14-40-0.us-east-2.compute.amazonaws.com $(aws ecr get-login --region us-east-2)
-
+ssh -i "jenkins-keypair.pem" ec2-user@ec2-52-14-40-0.us-east-2.compute.amazonaws.com docker stop '$(docker ps -q)'
 ssh -i "jenkins-keypair.pem" ec2-user@ec2-52-14-40-0.us-east-2.compute.amazonaws.com docker pull 687517088689.dkr.ecr.us-east-2.amazonaws.com/dc-demo-app-image:latest
 ssh -i "jenkins-keypair.pem" ec2-user@ec2-52-14-40-0.us-east-2.compute.amazonaws.com docker run -d -p 80:80 -t 687517088689.dkr.ecr.us-east-2.amazonaws.com/dc-demo-app-image:latest'''
         
