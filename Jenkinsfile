@@ -31,9 +31,8 @@ echo "Update DEV environment"
 docker run -d -p 80:80 -t 687517088689.dkr.ecr.us-east-2.amazonaws.com/dc-demo-app-image:latest
 
 
-
-'''
-    echo 'RUN FUNCTIONAL TESTS'
+ '''
+   /* echo 'RUN FUNCTIONAL TESTS'
 	build(job: 'SeleniumTesting-DEV', wait: true)
 	      
 	echo 'RUN PERFORMANCE TESTS'
@@ -45,7 +44,7 @@ docker run -d -p 80:80 -t 687517088689.dkr.ecr.us-east-2.amazonaws.com/dc-demo-a
 	echo 'UPDATE JIRA'
 	sh 'curl -D- -u hellopinak@icloud.com:nZdLpbCVUTFw3fxxsFXspyKAk -p -H "Content-Type: application/json" -X POST --data \'{"body":"{color:#14892c}Released to DEV{color}"}\' https://dc2017demo.atlassian.net/rest/api/latest/issue/DCDEM-24/comment'
       }
-    }
+    } */
     stage('TEST') {
       steps {
         echo 'CREATE TEST ENVIRONMENT IN AWS'
@@ -62,7 +61,7 @@ ssh -i "jenkins-keypair.pem" ec2-user@ec2-13-59-175-163.us-east-2.compute.amazon
 ssh -i "jenkins-keypair.pem" ec2-user@ec2-13-59-175-163.us-east-2.compute.amazonaws.com docker pull 687517088689.dkr.ecr.us-east-2.amazonaws.com/dc-demo-app-image:latest
 ssh -i "jenkins-keypair.pem" ec2-user@ec2-13-59-175-163.us-east-2.compute.amazonaws.com docker run -d -p 80:80 -t 687517088689.dkr.ecr.us-east-2.amazonaws.com/dc-demo-app-image:latest'''
         
-	echo 'RUN FUNCTIONAL TESTS IN TEST'
+     /*	echo 'RUN FUNCTIONAL TESTS IN TEST'
 	build 'SeleniumTesting-TEST'
 	      
 	echo 'RUN PERFORMANCE TESTS IN TEST'      
@@ -75,7 +74,7 @@ ssh -i "jenkins-keypair.pem" ec2-user@ec2-13-59-175-163.us-east-2.compute.amazon
  	sh 'curl -D- -u hellopinak@icloud.com:nZdLpbCVUTFw3fxxsFXspyKAk -p -H "Content-Type: application/json" -X POST --data \'{"body":"{color:#14892c}Released to TEST{color}"}\' https://dc2017demo.atlassian.net/rest/api/latest/issue/DCDEM-24/comment'
 
       }
-    }
+    }*/
     stage('STAGE') {
       steps {
         echo 'CREATE STAGE ENVIRONMENT IN AWS'
@@ -92,7 +91,7 @@ ssh -i "jenkins-keypair.pem" ec2-user@ec2-13-59-159-158.us-east-2.compute.amazon
 ssh -i "jenkins-keypair.pem" ec2-user@ec2-13-59-159-158.us-east-2.compute.amazonaws.com docker pull 687517088689.dkr.ecr.us-east-2.amazonaws.com/dc-demo-app-image:latest
 ssh -i "jenkins-keypair.pem" ec2-user@ec2-13-59-159-158.us-east-2.compute.amazonaws.com docker run -d -p 80:80 -t 687517088689.dkr.ecr.us-east-2.amazonaws.com/dc-demo-app-image:latest'''
         
-	echo 'RUN FUNCTIONAL TESTS IN STAGE'
+     /*	echo 'RUN FUNCTIONAL TESTS IN STAGE'
 	build 'SeleniumTesting-STAGE'
 	      
 	echo 'RUN PERFORMANCE TESTS IN STAGE'
@@ -104,7 +103,7 @@ ssh -i "jenkins-keypair.pem" ec2-user@ec2-13-59-159-158.us-east-2.compute.amazon
 	echo 'UPDATE JIRA'
 	sh 'curl -D- -u hellopinak@icloud.com:nZdLpbCVUTFw3fxxsFXspyKAk -p -H "Content-Type: application/json" -X POST --data \'{"body":"{color:#14892c}Released to STAGE{color}"}\' https://dc2017demo.atlassian.net/rest/api/latest/issue/DCDEM-24/comment'
       }
-    }
+    }*/
 
        stage("Go/No-Go?") {
             steps {
