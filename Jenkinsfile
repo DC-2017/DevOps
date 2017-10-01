@@ -36,7 +36,7 @@ docker run -d -p 80:80 -t 687517088689.dkr.ecr.us-east-2.amazonaws.com/dc-demo-a
 	build(job: 'SeleniumTesting-DEV', wait: true)
 	      
 	echo 'RUN PERFORMANCE TESTS'
- 	build 'JMeterTesting-DEV'
+ 	build 'JMeterTesting-DEV'*/
 	      
 	echo 'NOTIFY SLACK'      
 	sh 'curl -X POST --data-urlencode \'payload={"channel": "#ci-cd-demo", "username": "monkey-bot", "text": "Released to DEV", "icon_emoji": ":monkey_face:"}\' https://hooks.slack.com/services/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'
@@ -44,7 +44,7 @@ docker run -d -p 80:80 -t 687517088689.dkr.ecr.us-east-2.amazonaws.com/dc-demo-a
 	echo 'UPDATE JIRA'
 	sh 'curl -D- -u hellopinak@icloud.com:nZdLpbCVUTFw3fxxsFXspyKAk -p -H "Content-Type: application/json" -X POST --data \'{"body":"{color:#14892c}Released to DEV{color}"}\' https://dc2017demo.atlassian.net/rest/api/latest/issue/DCDEM-24/comment'
       }
-    } */
+    } 
     stage('TEST') {
       steps {
         echo 'CREATE TEST ENVIRONMENT IN AWS'
@@ -65,7 +65,7 @@ ssh -i "jenkins-keypair.pem" ec2-user@ec2-13-59-175-163.us-east-2.compute.amazon
 	build 'SeleniumTesting-TEST'
 	      
 	echo 'RUN PERFORMANCE TESTS IN TEST'      
-     build 'JMeterTesting-TEST'
+     build 'JMeterTesting-TEST'*/
 	 
  	echo 'NOTIFY SLACK'      
  	sh 'curl -X POST --data-urlencode \'payload={"channel": "#ci-cd-demo", "username": "monkey-bot", "text": "Released to TEST", "icon_emoji": ":monkey_face:"}\' https://hooks.slack.com/services/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'
@@ -74,7 +74,7 @@ ssh -i "jenkins-keypair.pem" ec2-user@ec2-13-59-175-163.us-east-2.compute.amazon
  	sh 'curl -D- -u hellopinak@icloud.com:nZdLpbCVUTFw3fxxsFXspyKAk -p -H "Content-Type: application/json" -X POST --data \'{"body":"{color:#14892c}Released to TEST{color}"}\' https://dc2017demo.atlassian.net/rest/api/latest/issue/DCDEM-24/comment'
 
       }
-    }*/
+    }
     stage('STAGE') {
       steps {
         echo 'CREATE STAGE ENVIRONMENT IN AWS'
@@ -95,7 +95,7 @@ ssh -i "jenkins-keypair.pem" ec2-user@ec2-13-59-159-158.us-east-2.compute.amazon
 	build 'SeleniumTesting-STAGE'
 	      
 	echo 'RUN PERFORMANCE TESTS IN STAGE'
-    build 'JMeterTesting-STAGE'
+    build 'JMeterTesting-STAGE'*/
 	
 	echo 'NOTIFY SLACK'      
 	sh 'curl -X POST --data-urlencode \'payload={"channel": "#ci-cd-demo", "username": "monkey-bot", "text": "Released to STAGE", "icon_emoji": ":monkey_face:"}\' https://hooks.slack.com/services/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'
@@ -103,7 +103,7 @@ ssh -i "jenkins-keypair.pem" ec2-user@ec2-13-59-159-158.us-east-2.compute.amazon
 	echo 'UPDATE JIRA'
 	sh 'curl -D- -u hellopinak@icloud.com:nZdLpbCVUTFw3fxxsFXspyKAk -p -H "Content-Type: application/json" -X POST --data \'{"body":"{color:#14892c}Released to STAGE{color}"}\' https://dc2017demo.atlassian.net/rest/api/latest/issue/DCDEM-24/comment'
       }
-    }*/
+    }
 
        stage("Go/No-Go?") {
             steps {
